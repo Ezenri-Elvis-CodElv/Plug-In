@@ -8,14 +8,12 @@ const BG_DARK = "#080808";
 const BG_LIGHT = "#F7F4F3";
 
 const Loader = () => {
-  // Only show particles after mount (client-side)
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // Generate randoms only once per mount (client only)
   const particles = useMemo(() => {
     if (!mounted) return [];
     return Array.from({ length: 10 }).map((_, i) => ({
@@ -31,7 +29,6 @@ const Loader = () => {
 
   return (
     <div className="fixed inset-0 w-full h-screen bg-gradient-to-br from-[#080808] to-[#E4A425]/10 z-[9999] flex justify-center items-center">
-      {/* Animated background particles */}
       <div className="absolute inset-0 overflow-hidden">
         {mounted &&
           particles.map((p, i) => (
