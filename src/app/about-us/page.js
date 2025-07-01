@@ -56,28 +56,18 @@ function HeroSection() {
         <div className="flex gap-4 mt-4">
           <Link href="/products">
             <motion.button
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.05, backgroundColor: "#C79518", color: "#fff" }}
               whileTap={{ scale: 0.97 }}
-              className="px-8 py-3 rounded-lg font-bold shadow-lg"
-              style={{
-                background: PRIMARY,
-                color: BG_DARK,
-                border: `2px solid ${PRIMARY}`,
-              }}
+              className="px-8 py-3 rounded-lg font-bold shadow-lg bg-[#E4A425] text-white border-2 border-[#E4A425] transition-colors"
             >
               Explore Products
             </motion.button>
           </Link>
           <Link href="/learnmore">
             <motion.button
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.05, backgroundColor: "#E4A425", color: "#fff" }}
               whileTap={{ scale: 0.97 }}
-              className="px-8 py-3 rounded-lg font-bold border-2"
-              style={{
-                background: "transparent",
-                color: PRIMARY,
-                border: `2px solid ${PRIMARY}`,
-              }}
+              className="px-8 py-3 rounded-lg font-bold border-2 border-[#E4A425] text-[#E4A425] bg-transparent hover:bg-[#E4A425] hover:text-white transition-colors"
             >
               Learn More
             </motion.button>
@@ -133,7 +123,7 @@ function MissionVisionValues() {
       <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-10" ref={ref}>
         <motion.div
           whileHover={{ scale: 1.04, boxShadow: `0 4px 32px 0 ${PRIMARY}33` }}
-          className="rounded-xl bg-white p-8 shadow transition"
+          className="rounded-xl bg-white  p-8 shadow transition"
         >
           <h3 className="text-2xl font-bold mb-3" style={{ color: PRIMARY }}>
             Our Mission
@@ -258,9 +248,9 @@ function PricingCard() {
           </p>
           <Link href="/products">
             <motion.button
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.05, backgroundColor: "#C79518", color: "#fff" }}
               whileTap={{ scale: 0.97 }}
-              className="w-full rounded bg-[#E4A425] px-9 py-4 text-xl text-black font-bold shadow-lg hover:bg-[#c48b1a] transition-colors md:w-fit"
+              className="w-full rounded bg-[#E4A425] px-9 py-4 text-xl text-black font-bold shadow-lg hover:bg-[#C79518] transition"
             >
               Get it now
             </motion.button>
@@ -331,9 +321,9 @@ function DragCardsSection() {
   const cards = [
     { src: "/emeka.jpeg", name: "Emeka Okwosa", stack: "Frontend Developer", phone: "+234 707 123 7007" },
     { src: "/seth.jpeg", name: "Seth Ezeofformah", stack: "FullStack Developer", phone: "+234 902 736 6000" },
-    { src: "/elvis.jpeg", name: "Elvis Ezenri", stack: "UI/UX Designer / FullStack Developer", phone: "+234 704 726 0206" },
+    { src: "/elvis2.jpeg", name: "Elvis Ezenri", stack: "UI/UX Designer / FullStack Developer", phone: "+234 704 726 0206" },
   { src: "/ebuka.jpeg", name: "Dipsix Offormah", stack: "Frontend Developer", phone: "+234 814 038 1501" },
-    { src: "/johnpaul.jpeg", name: "Johnpaul  Edet", stack: "FullStack Developer", phone: "+234 808 614 9495" },
+    { src: "/johnpaul2.jpeg", name: "Johnpaul  Edet", stack: "FullStack Developer", phone: "+234 808 614 9495" },
   ];
   const containerRef = useRef(null);
 
@@ -540,18 +530,18 @@ export default function Aboutus() {
           <div className="mt-8 flex gap-4">
             <Link href="/products">
               <motion.button
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.05, backgroundColor: "#C79518", color: "#fff" }}
                 whileTap={{ scale: 0.97 }}
-                className="px-6 py-3 bg-[#E4A425] text-[#080808] font-bold rounded-lg shadow hover:bg-[#c48b1a] transition"
+                className="px-6 py-3 bg-[#E4A425] text-white font-bold rounded-lg shadow hover:bg-[#C79518] transition"
               >
                 See Products
               </motion.button>
             </Link>
             <Link href="/learnmore">
               <motion.button
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.05, backgroundColor: "#E4A425", color: "#fff" }}
                 whileTap={{ scale: 0.97 }}
-                className="px-6 py-3 border-2 border-[#E4A425] text-[#E4A425] font-bold rounded-lg hover:bg-[#E4A425] hover:text-[#080808] transition"
+                className="px-6 py-3 border-2 border-[#E4A425] text-[#E4A425] font-bold rounded-lg hover:bg-[#E4A425] hover:text-white transition"
               >
                 Learn More
               </motion.button>

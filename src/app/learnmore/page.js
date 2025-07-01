@@ -35,10 +35,10 @@ const useTimer = (unit) => {
     const distance = +end - +now;
     let newTime = 0;
 
-    if (unit === "Day") newTime = Math.floor(distance / DAY);
-    else if (unit === "Hour") newTime = Math.floor((distance % DAY) / HOUR);
-    else if (unit === "Minute") newTime = Math.floor((distance % HOUR) / MINUTE);
-    else newTime = Math.floor((distance % MINUTE) / SECOND);
+    if (unit === "Day") newTime = Math.max(0, Math.floor(distance / DAY));
+    else if (unit === "Hour") newTime = Math.max(0, Math.floor((distance % DAY) / HOUR));
+    else if (unit === "Minute") newTime = Math.max(0, Math.floor((distance % HOUR) / MINUTE));
+    else newTime = Math.max(0, Math.floor((distance % MINUTE) / SECOND));
 
     if (newTime !== timeRef.current) {
       await animateFn(
@@ -104,7 +104,8 @@ const AuroraHero = () => {
       repeatType: "mirror",
     });
   }, [color]);
-  const backgroundImage = useMotionTemplate`radial-gradient(125% 125% at 50% 0%, ${BG_DARK} 50%, ${color})`;
+  // Blend BG_LIGHT with animated color
+  const backgroundImage = useMotionTemplate`linear-gradient(120deg, ${BG_LIGHT} 60%, ${color})`;
   const border = useMotionTemplate`2px solid ${PRIMARY}`;
   const boxShadow = useMotionTemplate`0px 4px 24px ${PRIMARY}`;
 

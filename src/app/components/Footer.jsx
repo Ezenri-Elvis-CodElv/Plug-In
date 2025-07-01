@@ -77,13 +77,13 @@ const Footer = () => {
   return (
     <motion.footer
       ref={footerRef}
-      className="bg-black text-white pt-20 pb-12 px-6 md:px-16 overflow-hidden"
+      className="bg-[#080808] text-white pt-20 pb-12 px-6 md:px-16 overflow-hidden"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
     >
       {/* Main Footer Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-16 border-b border-gray-800">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-16 border-b border-[#2B2B2B]">
         {/* Brand Column */}
         <div className="lg:col-span-2">
           <motion.div
@@ -91,42 +91,43 @@ const Footer = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
           >
-            <img
-              src="/logo.png"
-              alt="Plugin Logo"
-              className="h-12 w-auto mb-4"
-            />
-            <p className="text-gray-400 mb-6 max-w-md">
+            <Link href="/">
+              <img
+                src="/logo.png"
+                alt="Plugin Logo"
+                className="h-12 w-auto mb-4"
+              />
+            </Link>
+            <p className="text-[#D9D9D9] mb-6 max-w-md">
               Africa’s trusted service marketplace—connecting customers with skilled professionals online, offline & on-demand.
             </p>
-            
             {/* Contact Info */}
             <div className="space-y-3">
               <div className="flex items-center gap-3">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#E4A425]" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                 </svg>
-                <span className="text-gray-300">Lagos, Nigeria</span>
+                <span className="text-[#D9D9D9]">Lagos, Nigeria</span>
               </div>
               <div className="flex items-center gap-3">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#E4A425]" viewBox="0 0 20 20" fill="currentColor">
                   <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                 </svg>
                 <a
                   href="tel:+2349035272603"
-                  className="text-gray-300 hover:text-yellow-400 transition"
+                  className="text-[#D9D9D9] hover:text-[#E4A425] transition"
                 >
                   +234 903 527 2603
                 </a>
               </div>
               <div className="flex items-center gap-3">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#E4A425]" viewBox="0 0 20 20" fill="currentColor">
                   <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                   <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                 </svg>
                 <a
                   href="mailto:talk.plugin@gmail.com"
-                  className="text-gray-300 hover:text-yellow-400 transition"
+                  className="text-[#D9D9D9] hover:text-[#E4A425] transition"
                 >
                   talk.plugin@gmail.com
                 </a>
@@ -134,7 +135,6 @@ const Footer = () => {
             </div>
           </motion.div>
         </div>
-
         {/* Navigation Columns */}
         {footerLinks.map((section, index) => (
           <motion.div
@@ -144,13 +144,13 @@ const Footer = () => {
             transition={{ delay: 0.1 * (index + 1) }}
             className="space-y-4"
           >
-            <h4 className="text-lg font-semibold text-yellow-400">{section.title}</h4>
+            <h4 className="text-lg font-semibold text-[#E4A425]">{section.title}</h4>
             <ul className="space-y-3">
               {section.links.map((link) => (
                 <li key={link.name}>
                   <Link 
                     href={link.url} 
-                    className="text-gray-400 hover:text-yellow-300 transition duration-300"
+                    className="text-[#D9D9D9] hover:text-[#E4A425] transition duration-300"
                   >
                     {link.name}
                   </Link>
@@ -160,7 +160,6 @@ const Footer = () => {
           </motion.div>
         ))}
       </div>
-
       {/* Newsletter & Social Section */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 py-16">
         {/* Newsletter */}
@@ -168,13 +167,12 @@ const Footer = () => {
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.4 }}
-          className="bg-gray-900 rounded-xl p-8"
+          className="bg-[#181818] rounded-xl p-8"
         >
-          <h4 className="text-2xl font-bold text-yellow-400 mb-3">Stay Updated</h4>
-          <p className="text-gray-400 mb-6">
+          <h4 className="text-2xl font-bold text-[#E4A425] mb-3">Stay Updated</h4>
+          <p className="text-[#D9D9D9] mb-6">
             Subscribe to our newsletter for exclusive updates, offers, and industry insights.
           </p>
-          
           <form onSubmit={handleSubscribe} className="space-y-4">
             <div className="flex flex-col sm:flex-row gap-3">
               <input
@@ -182,19 +180,18 @@ const Footer = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
-                className="flex-grow px-5 py-3 rounded-lg bg-gray-800 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                className="flex-grow px-5 py-3 rounded-lg bg-[#232323] text-white placeholder-[#D9D9D9] focus:outline-none focus:ring-2 focus:ring-[#E4A425]"
                 required
               />
               <motion.button
-                whileHover={{ scale: 1.03 }}
+                whileHover={{ scale: 1.03, backgroundColor: "#C79518" }}
                 whileTap={{ scale: 0.98 }}
                 type="submit"
-                className="bg-yellow-500 hover:bg-yellow-600 text-black font-bold px-6 py-3 rounded-lg transition duration-300"
+                className="bg-[#E4A425] hover:bg-[#C79518] text-white font-bold px-6 py-3 rounded-lg transition duration-300"
               >
                 Subscribe
               </motion.button>
             </div>
-            
             {subscribed && (
               <motion.p 
                 initial={{ opacity: 0 }}
@@ -204,25 +201,22 @@ const Footer = () => {
                 Thank you for subscribing!
               </motion.p>
             )}
-            
-            <p className="text-xs text-gray-500">
+            <p className="text-xs text-[#D9D9D9]">
               By subscribing, you agree to our Privacy Policy and consent to receive updates.
             </p>
           </form>
         </motion.div>
-
         {/* Social Media */}
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.5 }}
-          className="bg-gray-900 rounded-xl p-8"
+          className="bg-[#181818] rounded-xl p-8"
         >
-          <h4 className="text-2xl font-bold text-yellow-400 mb-3">Connect With Us</h4>
-          <p className="text-gray-400 mb-6">
+          <h4 className="text-2xl font-bold text-[#E4A425] mb-3">Connect With Us</h4>
+          <p className="text-[#D9D9D9] mb-6">
             Follow us on social media for the latest updates and community highlights.
           </p>
-          
           <div className="flex flex-wrap gap-4">
             {socialLinks.map((social, index) => (
               <motion.a
@@ -233,10 +227,10 @@ const Footer = () => {
                 whileHover={{ 
                   y: -5,
                   scale: 1.1,
-                  color: "#fbbf24",
+                  color: "#E4A425",
                   transition: { duration: 0.3 }
                 }}
-                className="bg-gray-800 hover:bg-gray-700 w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 group"
+                className="bg-[#232323] hover:bg-[#C79518] w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 group"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 * index }}
@@ -244,21 +238,20 @@ const Footer = () => {
                 <svg 
                   xmlns="http://www.w3.org/2000/svg" 
                   viewBox="0 0 24 24"
-                  className="w-6 h-6 text-gray-400 group-hover:text-white"
+                  className="w-6 h-6 text-[#D9D9D9] group-hover:text-white"
                 >
                   <path fill="currentColor" d={social.icon} />
                 </svg>
               </motion.a>
             ))}
           </div>
-          
-          <div className="mt-8 pt-6 border-t border-gray-800">
-            <h5 className="text-lg font-medium text-yellow-400 mb-3">Visit Our Web App</h5>
+          <div className="mt-8 pt-6 border-t border-[#2B2B2B]">
+            <h5 className="text-lg font-medium text-[#E4A425] mb-3">Visit Our Web App</h5>
             <div className="flex gap-4">
               <motion.a
                 href="/"
-                whileHover={{ scale: 1.05 }}
-                className="flex items-center gap-2 bg-yellow-500 hover:bg-yellow-600 text-black px-6 py-3 rounded-lg font-semibold transition"
+                whileHover={{ scale: 1.05, backgroundColor: "#C79518" }}
+                className="flex items-center gap-2 bg-[#E4A425] hover:bg-[#C79518] text-white px-6 py-3 rounded-lg font-semibold transition"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -269,7 +262,6 @@ const Footer = () => {
           </div>
         </motion.div>
       </div>
-
       {/* Bottom Section */}
       <motion.div 
         className="flex flex-col md:flex-row justify-between items-center pt-8"
@@ -277,20 +269,18 @@ const Footer = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.6 }}
       >
-        <p className="text-gray-500 text-sm">
+        <p className="text-[#D9D9D9] text-sm">
           © {new Date().getFullYear()} Plugin Technologies. All rights reserved.
         </p>
-        
         <div className="flex gap-6 mt-4 md:mt-0">
-          <Link href="/privacy" className="text-gray-500 hover:text-yellow-300 text-sm transition">Privacy Policy</Link>
-          <Link href="/terms" className="text-gray-500 hover:text-yellow-300 text-sm transition">Terms of Service</Link>
-          <Link href="/cookies" className="text-gray-500 hover:text-yellow-300 text-sm transition">Cookie Policy</Link>
+          <Link href="/privacy" className="text-[#D9D9D9] hover:text-[#E4A425] text-sm transition">Privacy Policy</Link>
+          <Link href="/terms" className="text-[#D9D9D9] hover:text-[#E4A425] text-sm transition">Terms of Service</Link>
+          <Link href="/cookies" className="text-[#D9D9D9] hover:text-[#E4A425] text-sm transition">Cookie Policy</Link>
         </div>
       </motion.div>
-
       {/* Decorative Elements */}
       <motion.div 
-        className="absolute right-10 bottom-20 w-24 h-24 rounded-full bg-yellow-400 opacity-10 blur-xl"
+        className="absolute right-10 bottom-20 w-24 h-24 rounded-full bg-[#E4A425] opacity-10 blur-xl"
         animate={{ scale: [1, 1.5, 1] }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
       />

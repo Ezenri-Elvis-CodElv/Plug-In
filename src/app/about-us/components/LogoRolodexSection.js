@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { SiAmazon, SiGoogle, SiMeta, SiGithub, SiTwitch } from "react-icons/si";
+import { FaInstagram, FaTwitter } from "react-icons/fa";
 import { twMerge } from "tailwind-merge";
 
 const DELAY_IN_MS = 2500;
@@ -47,7 +48,24 @@ export default function LogoRolodexSection() {
       <div className="hidden md:block ml-12">
         <p className="text-white text-lg font-semibold mb-2">Follow us on social media</p>
         <div className="flex gap-4 text-3xl">
-          {/* Social links remain same */}
+          <a
+            href="https://twitter.com/talk_plugin"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Twitter"
+            className="hover:text-blue-400 transition"
+          >
+            <FaTwitter />
+          </a>
+          <a
+            href="https://instagram.com/talk.plugin"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+            className="hover:text-pink-400 transition"
+          >
+            <FaInstagram />
+          </a>
         </div>
       </div>
     </section>

@@ -28,21 +28,36 @@ const Header = () => {
     opacity: 0,
   });
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState(() => {
-    // Initialize active tab from localStorage or current path
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('activeTab') || pathname;
+  const [isMobile, setIsMobile] = useState(false);
+  const [activeTab, setActiveTab] = useState(pathname);
+  const [isMounted, setIsMounted] = useState(false);
+
+  // Initialize component state after mount
+  useEffect(() => {
+    setIsMounted(true);
+    setIsMobile(window.innerWidth < 768);
+    
+    // Initialize active tab from localStorage
+    const storedTab = localStorage.getItem('activeTab');
+    if (storedTab) {
+      setActiveTab(storedTab);
     }
-    return pathname;
-  });
+    
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Update active tab when path changes
   useEffect(() => {
-    setActiveTab(pathname);
-    if (typeof window !== 'undefined') {
+    if (isMounted) {
+      setActiveTab(pathname);
       localStorage.setItem('activeTab', pathname);
     }
-  }, [pathname]);
+  }, [pathname, isMounted]);
 
   // Scramble effect for desktop button
   const intervalRef = useRef(null);
@@ -94,8 +109,12 @@ const Header = () => {
       animate={{
         y: 0,
         opacity: 1,
-        backgroundColor: isSticky ? "rgba(0,0,0,0.98)" : "rgba(0,0,0,0)",
-        boxShadow: isSticky ? "0 8px 32px 0 rgba(0,0,0,0.18)" : "none",
+        backgroundColor: isMobile
+          ? "#0F3D3E" // Teal accent for mobile
+          : isSticky
+            ? "#080808" // Off-white when sticky
+            : "rgba(0, 0, 0, 0.85)", // Off-white transparent
+        boxShadow: isSticky ? "0 8px 32px 0 rgba(0,0,0,0.08)" : "none",
         backdropFilter: isSticky ? "blur(8px)" : "none",
       }}
       transition={{
@@ -104,25 +123,27 @@ const Header = () => {
         damping: 18,
         duration: 0.55,
       }}
-      className={`flex items-center justify-between px-6 py-4 text-white z-50 w-full fixed top-0 left-0 right-0`}
+      className="flex items-center justify-between px-6 py-4 text-[#080808] z-50 w-full fixed top-0 left-0 right-0"
       style={{ zIndex: 1000 }}
     >
       {/* Logo */}
-      <div className="text-xl font-bold text-yellow-400 flex items-center gap-2">
-        <img src="/logo.png" alt="Plugin Logo" className="h-10 w-auto object-contain" />
+      <div className="text-xl font-bold text-[#E4A425] flex items-center gap-2">
+        <Link href="/">
+          <img src="/logo.png" alt="Plugin Logo" className="h-10 w-auto object-contain cursor-pointer" />
+        </Link>
       </div>
 
       {/* Desktop Navigation */}
       <ul
         onMouseLeave={() => setPosition({ ...position, opacity: 0 })}
-        className="relative items-center rounded-full border-2 border-yellow-400 bg-black p-1 hidden md:flex"
+        className="relative items-center rounded-full border-2 border-[#eca515] bg-[#000000] p-1 hidden md:flex"
       >
         {sections.map(({ label, path }) => (
-          <Tab 
-            key={path} 
-            setPosition={setPosition} 
+          <Tab
+            key={path}
+            setPosition={setPosition}
             href={path}
-            isActive={activeTab === path}
+            isActive={pathname === path}
           >
             {label}
           </Tab>
@@ -135,11 +156,11 @@ const Header = () => {
         href={WEB_APP_URL}
         target="_blank"
         rel="noopener noreferrer"
-        whileHover={{ scale: 1.025 }}
+        whileHover={{ scale: 1.025, backgroundColor: "#C79518", color: "#fff" }}
         whileTap={{ scale: 0.975 }}
         onMouseEnter={scramble}
         onMouseLeave={stopScramble}
-        className="ml-4 hidden md:inline-block relative overflow-hidden rounded-full border-2 border-yellow-400 bg-yellow-400 px-5 py-2 text-sm font-mono font-semibold text-black uppercase"
+        className="ml-4 hidden md:inline-block relative overflow-hidden rounded-full border-2 border-[#E4A425] bg-[#E4A425] px-5 py-2 text-sm font-mono font-semibold text-white uppercase transition-colors duration-200"
       >
         <div className="relative z-10 flex items-center gap-2">
           <span>{text}</span>
@@ -153,13 +174,13 @@ const Header = () => {
             duration: 1,
             ease: "linear",
           }}
-          className="absolute inset-0 z-0 scale-125 bg-gradient-to-t from-yellow-400/0 from-40% via-yellow-400/100 to-yellow-400/0 to-60% opacity-0 group-hover:opacity-100"
+          className="absolute inset-0 z-0 scale-125 bg-gradient-to-t from-[#E4A425]/0 from-40% via-[#E4A425]/100 to-[#E4A425]/0 to-60% opacity-0 group-hover:opacity-100"
         />
       </motion.a>
 
       {/* Mobile Menu Button */}
       <button
-        className="md:hidden text-yellow-400 text-2xl z-50 bg-gray-800"
+        className="md:hidden text-[#E4A425] text-2xl z-50"
         onClick={() => setMobileOpen(true)}
         aria-label="Open menu"
       >
@@ -203,16 +224,12 @@ const Header = () => {
                     <Link
                       href={path}
                       className={`block py-3 px-3 rounded-lg transition ${
-                        activeTab === path 
+                        isMounted && activeTab === path 
                           ? "bg-yellow-400 text-black" 
                           : "hover:bg-yellow-400/10 hover:text-white"
                       }`}
                       onClick={() => {
-                        setActiveTab(path);
                         setMobileOpen(false);
-                        if (typeof window !== 'undefined') {
-                          localStorage.setItem('activeTab', path);
-                        }
                       }}
                     >
                       {label}
@@ -247,7 +264,7 @@ const Tab = ({ children, setPosition, href, isActive }) => {
       ref={ref}
       onMouseEnter={() => {
         if (!ref?.current) return;
-        const { left, width } = ref.current.getBoundingClientRect();
+        const { width } = ref.current.getBoundingClientRect();
         setPosition({
           left: ref.current.offsetLeft,
           width,
@@ -258,7 +275,9 @@ const Tab = ({ children, setPosition, href, isActive }) => {
         isActive ? "text-yellow-400 font-bold" : "text-white"
       }`}
     >
-      <Link href={href}>{children}</Link>
+      <Link href={href} className="block w-full h-full">
+        {children}
+      </Link>
     </li>
   );
 };

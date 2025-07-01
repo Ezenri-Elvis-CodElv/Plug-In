@@ -1,7 +1,7 @@
 "use client";
-import React, { useState } from "react";
-import { motion } from "framer-motion";
-import { FiMail, FiPhone, FiMapPin, FiSend } from "react-icons/fi";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { FiMail, FiPhone, FiMapPin, FiSend, FiCheckSquare, FiX } from "react-icons/fi";
 import { FaTwitter, FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
 import Image from "next/image"; // Import Next.js Image
 
@@ -10,9 +10,43 @@ const PRIMARY = "#E4A425";
 const BG_DARK = "#080808";
 const BG_LIGHT = "#F7F4F3";
 
+const NOTIFICATION_TTL = 5000;
+
+const Notification = ({ text, id, removeNotif }) => {
+  useEffect(() => {
+    const timeoutRef = setTimeout(() => {
+      removeNotif(id);
+    }, NOTIFICATION_TTL);
+    return () => clearTimeout(timeoutRef);
+  }, [id, removeNotif]);
+
+  return (
+    <motion.div
+      layout
+      initial={{ y: -15, scale: 0.95 }}
+      animate={{ y: 0, scale: 1 }}
+      exit={{ x: "100%", opacity: 0 }}
+      transition={{ duration: 0.35, ease: "easeOut" }}
+      className="p-2 flex items-start rounded gap-2 text-xs font-medium shadow-lg text-white bg-indigo-500 pointer-events-auto"
+    >
+      <FiCheckSquare className="mt-0.5" />
+      <span>{text}</span>
+      <button onClick={() => removeNotif(id)} className="ml-auto mt-0.5">
+        <FiX />
+      </button>
+    </motion.div>
+  );
+};
+
+const generateRandomNotif = (msg) => ({
+  id: Math.random(),
+  text: msg || "Message sent successfully!",
+});
+
 export default function ContactUs() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [notifications, setNotifications] = useState([]);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -21,8 +55,22 @@ export default function ContactUs() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setSubmitted(true);
+    setNotifications((prev) => [...prev, generateRandomNotif()]);
     setTimeout(() => setSubmitted(false), 4000);
     setForm({ name: "", email: "", message: "" });
+  };
+
+  const removeNotif = (id) => {
+    setNotifications((prev) => prev.filter((notif) => notif.id !== id));
+  };
+
+  const copyToClipboard = (text) => {
+    navigator.clipboard.writeText(text);
+  };
+
+  const openMap = (address) => {
+    const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
+    window.open(url, "_blank");
   };
 
   return (
@@ -53,17 +101,50 @@ export default function ContactUs() {
             transition={{ duration: 0.7, delay: 0.3 }}
             className="flex flex-col gap-6 justify-center"
           >
-            <div className="flex items-center gap-4">
+            {/* Email */}
+            <div className="flex items-center gap-4 group">
               <FiMail className="text-2xl text-[#E4A425]" />
-              <span className="text-[#F7F4F3]">talk.plugin@gmail.com</span>
+              <button
+                type="button"
+                onClick={() => {
+                  copyToClipboard("talk.plugin@gmail.com");
+                  window.open("mailto:talk.plugin@gmail.com");
+                }}
+                className="text-[#F7F4F3] underline underline-offset-2 hover:text-[#E4A425] transition cursor-pointer"
+                title="Copy & Email"
+              >
+                talk.plugin@gmail.com
+              </button>
             </div>
-            <div className="flex items-center gap-4">
+            {/* Phone */}
+            <div className="flex items-center gap-4 group">
               <FiPhone className="text-2xl text-[#E4A425]" />
-              <span className="text-[#F7F4F3]">+234 903 527 2603</span>
+              <button
+                type="button"
+                onClick={() => {
+                  copyToClipboard("+2349035272603");
+                  window.open("tel:+2349035272603");
+                }}
+                className="text-[#F7F4F3] underline underline-offset-2 hover:text-[#E4A425] transition cursor-pointer"
+                title="Copy & Call"
+              >
+                +234 903 527 2603
+              </button>
             </div>
-            <div className="flex items-center gap-4">
+            {/* Address */}
+            <div className="flex items-center gap-4 group">
               <FiMapPin className="text-2xl text-[#E4A425]" />
-              <span className="text-[#F7F4F3]">258 Borno Way, Yaba, Lagos</span>
+              <button
+                type="button"
+                onClick={() => {
+                  copyToClipboard("258 Borno Way, Yaba, Lagos");
+                  openMap("258 Borno Way, Yaba, Lagos");
+                }}
+                className="text-[#F7F4F3] underline underline-offset-2 hover:text-[#E4A425] transition cursor-pointer"
+                title="Copy & Locate"
+              >
+                258 Borno Way, Yaba, Lagos
+              </button>
             </div>
             <div className="flex gap-4 mt-4">
               <a
@@ -155,16 +236,20 @@ export default function ContactUs() {
               <FiSend />
               Send Message
             </motion.button>
-            {submitted && (
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="text-green-400 font-medium text-center"
-              >
-                Thank you for reaching out! We’ll get back to you soon.
-              </motion.p>
-            )}
           </motion.form>
+        </div>
+        {/* Notifications */}
+        <div className="fixed bottom-4 right-4 z-50 flex flex-col gap-2">
+          <AnimatePresence>
+            {notifications.map((notif) => (
+              <Notification
+                key={notif.id}
+                id={notif.id}
+                text={notif.text}
+                removeNotif={removeNotif}
+              />
+            ))}
+          </AnimatePresence>
         </div>
       </section>
     </main>
