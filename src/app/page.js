@@ -596,7 +596,7 @@ const Hero = () => (
   >
     <CenterImage />
     <ParallaxImages />
-    <div className="absolute bottom-0 left-0 right-0 h-96 bg-gradient-to-b from-zinc-950/0 to-zinc-950" />
+    <div className="absolute bottom-0 left-0 right-0 h-96 bg-[#000000]" />
     {/* Overlay your hero content here if you want */}
     <div className="absolute inset-0 flex flex-col items-center justify-center z-10 pointer-events-none">
       <div className="container mx-auto px-4 py-20 flex flex-col items-center text-center max-w-4xl relative pointer-events-auto">

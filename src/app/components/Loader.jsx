@@ -355,7 +355,7 @@ const Loader = () => {
         </div>
 
         <Motion.div
-          className="mt-4 text-sm text-[#2B2B2B]"
+          className="mt-4 text-sm text-[#ffea00]"
           animate={{ opacity: [0.6, 1, 0.6] }}
           transition={{
             duration: 2,

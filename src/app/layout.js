@@ -38,7 +38,7 @@ export default function RootLayout({ children }) {
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <head>
         <meta name="description" content="Africa’s trusted service marketplace—connecting customers with skilled professionals online, offline & on-demand." />
-        <link rel="icon" href="/logo.png" type="image/png" />
+        <link rel="icon" href="/logoblack.png" type="image/png" />
       </head>
       <body className="antialiased">
         {loading ? (
