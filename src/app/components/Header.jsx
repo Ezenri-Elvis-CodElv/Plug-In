@@ -271,9 +271,13 @@ const Tab = ({ children, setPosition, href, isActive }) => {
           opacity: 1,
         });
       }}
-      className={`relative z-10 px-4 py-2 text-sm uppercase cursor-pointer ${
-        isActive ? "text-yellow-400 font-bold" : "text-white"
-      }`}
+      // Improved: non-active is white, on hover stays white; active is gold, on hover white
+      className={`relative z-10 px-4 py-2 text-sm uppercase cursor-pointer
+        ${isActive
+          ? "text-yellow-400 font-bold hover:text-white"
+          : "text-white hover:text-white"}
+        transition-colors duration-200
+      `}
     >
       <Link href={href} className="block w-full h-full">
         {children}

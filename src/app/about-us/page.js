@@ -32,7 +32,7 @@ function HeroSection() {
 
   return (
     <section
-      className="w-full min-h-[60vh] flex flex-col md:flex-row items-center justify-between px-6 md:px-20 py-16"
+      className="w-full min-h-[60vh] flex flex-col md:flex-row items-center justify-between px-6 md:px-20 py-16 pt-32"
       style={{ background: BG_DARK, color: PRIMARY }}
     >
       <div className="flex-1 flex flex-col gap-6">

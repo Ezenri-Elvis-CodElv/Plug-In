@@ -224,7 +224,7 @@ export default function Faqs() {
 					initial={{ opacity: 0, y: -30 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.7 }}
-					className="text-4xl md:text-5xl font-bold text-center mb-10 text-yellow-500"
+					className="text-4xl md:text-5xl font-bold text-center mb-10 text-yellow-500 pt-12"
 				>
 					Frequently Asked Questions
 				</motion.h1>
